@@ -1,0 +1,129 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<h1>Calculate Form</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <p>{{ form.survey_date.label }} {{ form.survey_date(size=20) }}</p>
+    {% if form.survey_date.errors %}
+    <ul class="errors">
+        {% for error in form.survey_date.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.fullname.label }} {{ form.fullname(size=20) }}</p>
+    {% if form.fullname.errors %}
+    <ul class="errors">
+        {% for error in form.fullname.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.birthdate.label }} {{ form.birthdate(size=20) }}</p>
+    {% if form.birthdate.errors %}
+    <ul class="errors">
+        {% for error in form.birthdate.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.gender.label }} {{ form.gender(size=20) }}</p>
+    {% if form.gender.errors %}
+    <ul class="errors">
+        {% for error in form.gender.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.height.label }} {{ form.height(size=20) }}</p>
+    {% if form.height.errors %}
+    <ul class="errors">
+        {% for error in form.height.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.X6_birth_weight.label }} {{ form.X6_birth_weight(size=20) }}</p>
+    {% if form.X6_birth_weight.errors %}
+    <ul class="errors">
+        {% for error in form.X6_birth_weight.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.weight.label }} {{ form.weight(size=20) }}</p>
+    {% if form.weight.errors %}
+    <ul class="errors">
+        {% for error in form.weight.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.diagnosis_date.label }} {{ form.diagnosis_date(size=20) }}</p>
+    {% if form.diagnosis_date.errors %}
+    <ul class="errors">
+        {% for error in form.diagnosis_date.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.surgery_type.label }} {{ form.surgery_type(size=20) }}</p>
+    {% if form.surgery_type.errors %}
+    <ul class="errors">
+        {% for error in form.surgery_type.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.surgery_date.label }} {{ form.surgery_date(size=20) }}</p>
+    {% if form.surgery_date.errors %}
+    <ul class="errors">
+        {% for error in form.surgery_date.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.max_weight_before_surgery.label }} {{ form.max_weight_before_surgery(size=20) }}</p>
+    {% if form.max_weight_before_surgery.errors %}
+    <ul class="errors">
+        {% for error in form.max_weight_before_surgery.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.weight_before_surgery.label }} {{ form.weight_before_surgery(size=20) }}</p>
+    {% if form.weight_before_surgery.errors %}
+    <ul class="errors">
+        {% for error in form.weight_before_surgery.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.min_weight_after_surgery.label }} {{ form.min_weight_after_surgery(size=20) }}</p>
+    {% if form.min_weight_after_surgery.errors %}
+    <ul class="errors">
+        {% for error in form.min_weight_after_surgery.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.therapy_before_surgery.label }} {{ form.therapy_before_surgery(size=20) }}</p>
+    {% if form.therapy_before_surgery.errors %}
+    <ul class="errors">
+        {% for error in form.therapy_before_surgery.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p>{{ form.X9_HbA1c_before_surgery.label }} {{ form.X9_HbA1c_before_surgery(size=20) }}</p>
+    {% if form.X9_HbA1c_before_surgery.errors %}
+    <ul class="errors">
+        {% for error in form.X9_HbA1c_before_surgery.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <p><input type="submit" value="Submit"></p>
+</form>
+{% endblock %}
