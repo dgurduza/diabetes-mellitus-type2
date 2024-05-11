@@ -1,11 +1,9 @@
 from decouple import config
 from flask import Flask
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager # Add this line
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from src.calculator.regression import Regression
-import pickle 
 
 app = Flask(__name__)
 app.config.from_object(config("APP_SETTINGS"))
@@ -26,9 +24,3 @@ from src.core.views import core_bp
 app.register_blueprint(calculator_bp)
 app.register_blueprint(accounts_bp)
 app.register_blueprint(core_bp)
-
-#deserialize_array = None
-#reg_model = None
-#with open('statistics/model.pkl', 'rb') as f:
-#    deserialize_array = pickle.load(f)
-#    reg_model = Regression(deserialize_array)

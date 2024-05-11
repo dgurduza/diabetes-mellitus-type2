@@ -49,13 +49,16 @@ def register():
 @accounts_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        if current_user.is_two_factor_authentication_enabled:
+        if current_user.is_two_factor_authentication_enabled and current_user.is_two_factor_authenticated:
             flash("You are already logged in.", "info")
             return redirect(url_for(HOME_URL))
-        else:
+        elif not current_user.is_two_factor_authentication_enabled:
             flash(
                 "You have not enabled 2-Factor Authentication. Please enable first to login.", "info")
             return redirect(url_for(SETUP_2FA_URL))
+        else: 
+            flash("You have not entered 2FA code. Please enter code.", "info")
+            return redirect(url_for(VERIFY_2FA_URL))
         
     form = LoginForm(request.form)
     if form.validate_on_submit():
@@ -77,9 +80,17 @@ def login():
 @accounts_bp.route("/logout")
 @login_required
 def logout():
-    logout_user()
-    flash("You were logged out.", "success")
-    return redirect(url_for("accounts.login"))
+    try:
+        current_user.is_two_factor_authenticated = False
+        db.session.commit()
+        logout_user()
+        flash("You were logged out.", "success")
+    except Exception:
+            db.session.rollback()
+            flash("Logout is failed. Please try again.", "danger")
+    
+    return redirect(url_for("calculator.calculate"))
+
 
 
 @accounts_bp.route("/setup-2fa")
@@ -97,16 +108,19 @@ def verify_two_factor_auth():
     form = TwoFactorForm(request.form)
     if form.validate_on_submit():
         if current_user.is_otp_valid(form.otp.data):
-            if current_user.is_two_factor_authentication_enabled:
-                flash("2FA verification successful. You are logged in!", "success")
-                return redirect(url_for(HOME_URL))
-            else:
-                try:
+            try:
+                if current_user.is_two_factor_authentication_enabled:
+                    current_user.is_two_factor_authenticated = True
+                    db.session.commit()
+                    flash("2FA verification successful. You are logged in!", "success")
+                    return redirect(url_for(HOME_URL))
+                else:
+                    current_user.is_two_factor_authenticated = True
                     current_user.is_two_factor_authentication_enabled = True
                     db.session.commit()
                     flash("2FA setup successful. You are logged in!", "success")
                     return redirect(url_for(HOME_URL))
-                except Exception:
+            except Exception:
                     db.session.rollback()
                     flash("2FA setup failed. Please try again.", "danger")
                     return redirect(url_for(VERIFY_2FA_URL))

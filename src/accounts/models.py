@@ -17,6 +17,8 @@ class User(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     is_two_factor_authentication_enabled = db.Column(
         db.Boolean, nullable=False, default=False)
+    is_two_factor_authenticated= db.Column(
+        db.Boolean, nullable=False, default=False)
     secret_token = db.Column(db.String, unique=True)
 
     def __init__(self, username, password):

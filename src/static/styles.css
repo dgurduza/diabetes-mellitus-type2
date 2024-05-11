@@ -7,3 +7,214 @@
 a {
   text-decoration: none;
 }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8f8;
+}
+
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #f8f8f8;
+}
+
+/* Стили для выпадающего списка */
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #f8f8f8;
+}
+
+/* Стили для опций выпадающего списка */
+option {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Стили для наведения на опцию выпадающего списка */
+option:hover {
+  background-color: #f0f0f0;
+}
+
+option {
+  background-color: #fff;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+  outline: none;
+  border-color: #666;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Стилизация контейнера кнопки */
+.submit-button-container {
+    text-align: center; /* Центрирование содержимого */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+/* Стилизация кнопки */
+input[type="submit"] {
+    background-color: #4CAF50; /* Зеленый цвет фона */
+    color: white; /* Белый текст */
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Курсор в виде руки при наведении */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049; /* Чуть темнее зеленого при наведении */
+}
+
+.center-content {
+    text-align: center; /* Выравнивание содержимого по центру */
+}
+
+.submit-button-container {
+    text-align: center; /* Центрирование кнопки */
+    margin-top: 20px; /* Отступ сверху для отделения от остальной части формы */
+}
+
+/* Дополнительные стили для улучшения визуального вида формы */
+.form-container {
+    max-width: 600px; /* Максимальная ширина контейнера */
+    margin: 0; /* Центрирование по горизонтали */
+    background-color: #f8f8f8; /* Цвет фона */
+    border-radius: 5px; /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+}
+
+form {
+    width: 100%; /* Форма занимает всю ширину контейнера */
+}
+
+input[type="text"], select {
+    width: 100%; /* Полная ширина для текстовых полей и выпадающих списков */
+    padding: 12px; /* Отступы для текстовых полей */
+    margin-top: 8px; /* Отступ сверху для всех полей */
+    border: 1px solid #ccc; /* Граница для полей */
+    border-radius: 4px; /* Скругленные углы для полей */
+}
+
+.errors {
+    color: red; /* Цвет текста ошибок */
+    margin-top: 5px; /* Отступ сверху для списка ошибок */
+}
+
+.container {
+    margin: 0;
+}
+
+input[type="number"] {
+    width: 100%; /* Задает ширину поля ввода, здесь она на 100% контейнера */
+    padding: 8px; /* Внутренний отступ вокруг текста в поле ввода */
+    border: 1px solid #ccc; /* Граница поля ввода серого цвета */
+    border-radius: 4px; /* Скругление углов поля ввода */
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Тень, создающая эффект небольшого "поднятия" элемента */
+    font-size: 16px; /* Размер шрифта внутри поля ввода */
+    outline: none; /* Убирает стандартный контур фокуса в некоторых браузерах */
+}
+
+input[type="number"]:focus {
+    border-color: #666; /* Меняет цвет границы при фокусе на более темный */
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2); /* Увеличивает тень при фокусе */
+}
+/*КНОПКА ЗАГРУЗКИ ФАЙЛА*/
+.button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #000000;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.button, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(22px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .svg {
+  width: 20px;
+  fill: #fff;
+}
+
+.button:hover {
+  background: #000000;
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #2d2e2e;
+}
+
+.button:active {
+  border: 1px solid #2d2e2e;
+}

@@ -17,6 +17,7 @@ class Config(object):
     DEBUG_TB_ENABLED = False
     DEBUG_TB_INTERCEPT_REDIRECTS = False
     APP_NAME = config("APP_NAME")
+    UPLOAD_FOLDER = config("UPLOAD_FOLDER")
 
 
 class DevelopmentConfig(Config):
