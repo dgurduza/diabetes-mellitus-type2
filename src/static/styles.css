@@ -159,62 +159,57 @@ input[type="number"]:focus {
     border-color: #666; /* Меняет цвет границы при фокусе на более темный */
     box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2); /* Увеличивает тень при фокусе */
 }
-/*КНОПКА ЗАГРУЗКИ ФАЙЛА*/
-.button {
-  position: relative;
-  width: 150px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: 1px solid #000000;
-  background-color: #000000;
-  overflow: hidden;
+
+/* Стиль для sidebar */
+.sidebar {
+  height: 100%; /* 100% высоты */
+  width: 0; /* 0 ширина - sidebar изначально скрыт */
+  position: fixed; /* Фиксированное положение */
+  z-index: 1; /* Отображается поверх других элементов */
+  top: 0; /* Расположение вверху страницы */
+  left: 0; /* Расположение слева страницы */
+  background-color: #111; /* Цвет фона */
+  overflow-x: hidden; /* Скрывает горизонтальную прокрутку */
+  transition: 0.5s; /* Плавное открытие и закрытие */
+  padding-top: 60px; /* Отступ сверху */
 }
 
-.button, .button__icon, .button__text {
-  transition: all 0.3s;
+/* Стиль для элементов в sidebar */
+.sidebar a {
+  padding: 8px 8px 8px 32px; /* Отступы вокруг текста */
+  text-decoration: none; /* Без подчеркивания текста */
+  font-size: 25px; /* Размер шрифта */
+  color: #818181; /* Цвет текста */
+  display: block; /* Элементы отображаются как блоки */
+  transition: 0.3s; /* Плавность перехода */
 }
 
-.button .button__text {
-  transform: translateX(22px);
-  color: #fff;
-  font-weight: 600;
+/* Изменение стиля элементов при наведении */
+.sidebar a:hover {
+  color: #f1f1f1; /* Светлый цвет текста */
 }
 
-.button .button__icon {
+/* Кнопка для закрытия sidebar */
+.sidebar .closebtn {
   position: absolute;
-  transform: translateX(109px);
-  height: 100%;
-  width: 39px;
-  background-color: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
 
-.button .svg {
-  width: 20px;
-  fill: #fff;
+/* Кнопка для открытия sidebar */
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  top: 30px;
+  left: 10px;
+  margin-right: 5px;
 }
 
-.button:hover {
-  background: #000000;
-}
-
-.button:hover .button__text {
-  color: transparent;
-}
-
-.button:hover .button__icon {
-  width: 148px;
-  transform: translateX(0);
-}
-
-.button:active .button__icon {
-  background-color: #2d2e2e;
-}
-
-.button:active {
-  border: 1px solid #2d2e2e;
+.navbar {
+    height: 70px;  /* Увеличьте высоту, если нужно */
+    padding-top: 20px;  /* Добавьте верхний отступ */
 }
