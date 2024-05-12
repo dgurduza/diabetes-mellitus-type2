@@ -122,8 +122,9 @@ input[type="submit"]:hover {
     background-color: #f8f8f8; /* Цвет фона */
     border-radius: 5px; /* Скругленные углы */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+    max-height: 89vh;
+    overflow-y:auto
 }
-
 form {
     width: 100%; /* Форма занимает всю ширину контейнера */
 }
@@ -212,4 +213,52 @@ input[type="number"]:focus {
 .navbar {
     height: 70px;  /* Увеличьте высоту, если нужно */
     padding-top: 20px;  /* Добавьте верхний отступ */
+}
+
+/* Основные стили для таблицы */
+#example-table .tabulator {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Убираем видимость полосы прокрутки */
+}
+
+/* Стили заголовка таблицы */
+#example-table .tabulator-header {
+    background-color: #4CAF50; /* Зеленый цвет фона заголовка */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Стили ячеек таблицы */
+#example-table .tabulator-cell {
+    color: #333; /* Темно-серый текст */
+    border-bottom: 2px solid #E8E8E8; /* Линия под каждой ячейкой */
+}
+
+/* Стили при наведении на ячейки */
+#example-table .tabulator-row:hover {
+    background-color: #f4f4f4; /* Светло-серый фон при наведении */
+}
+
+/* Стилизация кнопки скачивания CSV */
+button-csv {
+    background-color: #4CAF50; /* Зеленый цвет фона */
+    display: block; /* Делаем кнопку блочным элементом */
+    width: fit-content; /* Автоматически подгоняем ширину под содержимое */
+    margin-left: auto; /* Выравниваем по центру */
+    margin-right: auto;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 10px;
+    margin-top: 20px;
+    cursor: pointer; /* Изменение курсора при наведении */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень для кнопки */
+    transition: background-color 0.3s; /* Плавное изменение цвета */
+}
+
+button-csv:hover {
+    background-color: #45a049; /* Темно-зеленый цвет при наведении */
 }

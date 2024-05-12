@@ -1,142 +1,141 @@
 {% extends "_base.html" %}
 
 {% block content %}
-<h1>Calculate Form</h1>
 {% if result.message %}
 <div>{{ result.message }}</div>
 {% endif %}
 <div class="form-container">
     <form method="POST">
         {{ form.hidden_tag() }}
-        <p>{{ form.survey_date.label }} {{ form.survey_date(size=20) }}</p>
+        <p>{{ form.survey_date.label }} {{ form.survey_date }}</p>
         {% if form.survey_date.errors %}
             {% for error in form.survey_date.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             <li>{{ form.survey_date.data }}</li>
             {% endfor %}
         {% endif %}
-        <p>{{ form.fullname.label }} {{ form.fullname(size=20) }}</p>
+        <p>{{ form.fullname.label }} {{ form.fullname }}</p>
         {% if form.fullname.errors %}
             {% for error in form.fullname.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.birthdate.label }} {{ form.birthdate(size=20) }}</p>
+        <p>{{ form.birthdate.label }} {{ form.birthdate }}</p>
         {% if form.birthdate.errors %}
             {% for error in form.birthdate.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.gender.label }} {{ form.gender(size=20) }}</p>
+        <p>{{ form.gender.label }} {{ form.gender }}</p>
         {% if form.gender.errors %}
             {% for error in form.gender.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.height.label }} {{ form.height(size=20) }}</p>
+        <p>{{ form.height.label }} {{ form.height }}</p>
         {% if form.height.errors %}
             {% for error in form.height.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.X6_birth_weight.label }} {{ form.X6_birth_weight(size=20) }}</p>
+        <p>{{ form.X6_birth_weight.label }} {{ form.X6_birth_weight }}</p>
         {% if form.X6_birth_weight.errors %}
             {% for error in form.X6_birth_weight.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.weight.label }} {{ form.weight(size=20) }}</p>
+        <p>{{ form.weight.label }} {{ form.weight }}</p>
         {% if form.weight.errors %}
             {% for error in form.weight.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.diagnosis_date.label }} {{ form.diagnosis_date(size=20) }}</p>
+        <p>{{ form.diagnosis_date.label }} {{ form.diagnosis_date }}</p>
         {% if form.diagnosis_date.errors %}
             {% for error in form.diagnosis_date.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.surgery_type.label }} {{ form.surgery_type(size=20) }}</p>
+        <p>{{ form.surgery_type.label }} {{ form.surgery_type }}</p>
         {% if form.surgery_type.errors %}
             {% for error in form.surgery_type.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.surgery_date.label }} {{ form.surgery_date(size=20) }}</p>
+        <p>{{ form.surgery_date.label }} {{ form.surgery_date }}</p>
         {% if form.surgery_date.errors %}
             {% for error in form.surgery_date.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.max_weight_before_surgery.label }} {{ form.max_weight_before_surgery(size=20) }}</p>
+        <p>{{ form.max_weight_before_surgery.label }} {{ form.max_weight_before_surgery }}</p>
         {% if form.max_weight_before_surgery.errors %}
             {% for error in form.max_weight_before_surgery.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.weight_before_surgery.label }} {{ form.weight_before_surgery(size=20) }}</p>
+        <p>{{ form.weight_before_surgery.label }} {{ form.weight_before_surgery }}</p>
         {% if form.weight_before_surgery.errors %}
             {% for error in form.weight_before_surgery.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.min_weight_after_surgery.label }} {{ form.min_weight_after_surgery(size=20) }}</p>
+        <p>{{ form.min_weight_after_surgery.label }} {{ form.min_weight_after_surgery }}</p>
         {% if form.min_weight_after_surgery.errors %}
             {% for error in form.min_weight_after_surgery.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.therapy_before_surgery.label }} {{ form.therapy_before_surgery(size=20) }}</p>
+        <p>{{ form.therapy_before_surgery.label }} {{ form.therapy_before_surgery }}</p>
         {% if form.therapy_before_surgery.errors %}
             {% for error in form.therapy_before_surgery.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
 
-        <p>{{ form.X9_HbA1c_before_surgery.label }} {{ form.X9_HbA1c_before_surgery(size=20) }}</p>
+        <p>{{ form.X9_HbA1c_before_surgery.label }} {{ form.X9_HbA1c_before_surgery }}</p>
         {% if form.X9_HbA1c_before_surgery.errors %}
             {% for error in form.X9_HbA1c_before_surgery.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.gestational_diabetes.label }} {{ form.gestational_diabetes(size=20) }}</p>
-        {% if form.gestational_diabetes.errors %}
-            {% for error in form.gestational_diabetes.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.complications_history.label }} {{ form.complications_history(size=20) }}</p>
-        {% if form.complications_history.errors %}
-            {% for error in form.complications_history.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.heredity.label }} {{ form.heredity(size=20) }}</p>
-        {% if form.heredity.errors %}
-            {% for error in form.heredity.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.dyslipidemia.label }} {{ form.dyslipidemia(size=20) }}</p>
-        {% if form.dyslipidemia.errors %}
-            {% for error in form.dyslipidemia.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.arterial_hypertension_degree.label }} {{ form.arterial_hypertension_degree(size=20) }}</p>
+        <p>{{ form.arterial_hypertension_degree.label }} {{ form.arterial_hypertension_degree }}</p>
         {% if form.arterial_hypertension_degree.errors %}
             {% for error in form.arterial_hypertension_degree.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p>{{ form.Target_HbA1c_now.label }} {{ form.Target_HbA1c_now(size=20) }}</p>
+        <p>{{ form.dyslipidemia.label }} {{ form.dyslipidemia }}</p>
+        {% if form.dyslipidemia.errors %}
+            {% for error in form.dyslipidemia.errors %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <p>{{ form.heredity.label }} {{ form.heredity }}</p>
+        {% if form.heredity.errors %}
+            {% for error in form.heredity.errors %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <p>{{ form.complications_history.label }} {{ form.complications_history }}</p>
+        {% if form.complications_history.errors %}
+            {% for error in form.complications_history.errors %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <p>{{ form.gestational_diabetes.label }} {{ form.gestational_diabetes }}</p>
+        {% if form.gestational_diabetes.errors %}
+            {% for error in form.gestational_diabetes.errors %}
+            <div class="alert alert-danger" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+        <p>{{ form.Target_HbA1c_now.label }} {{ form.Target_HbA1c_now }}</p>
         {% if form.Target_HbA1c_now.errors %}
             {% for error in form.Target_HbA1c_now.errors %}
             <div class="alert alert-danger" role="alert">{{ error }}</div>
             {% endfor %}
         {% endif %}
-        <p><input type="submit" value="Submit"></p>
+        <p><input type="submit" value="Отправить"></p>
     </form>
 </div>
 

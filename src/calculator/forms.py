@@ -5,8 +5,6 @@ from wtforms.validators import DataRequired, NumberRange, Length, Optional
 
 from src.calculator.models import Patient
 
-
-# TODO: Check date validation
 class CalculateForm(FlaskForm):
     survey_date = DateField(
         "Дата опроса", validators=[DataRequired()]
@@ -171,5 +169,3 @@ class CalculateForm(FlaskForm):
             )
             return False
         return True
-        # first_date = datetime.strptime(self.surgery_date.data, '%d.%m.%Y')
-        # second_date = datetime.strptime(datetime.now(), '%d.%m.%Y')
