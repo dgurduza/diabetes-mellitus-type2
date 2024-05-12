@@ -43,28 +43,57 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="#">Главная</a>
         <a href="{{ url_for('core.get_table') }}">Пациенты</a>
-        <a href="#">Аналитика</a>
+        <a href="{{ url_for('core.get_analitics') }}">Аналитика</a>
         <a href="#">Администрирование</a>
     </div>
 </nav>
 
     <div id="example-table"></div>
     <script src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
     <script>
 
 document.addEventListener("DOMContentLoaded", function() {
-    var data = Array.from({ length: 100 }, () => ({
-        id: Math.floor(Math.random() * 10000),
-        name: `Item ${Math.floor(Math.random() * 100)}`,
-        price: Math.random() * 100
-    }));
+    // var data = Array.from({ length: 100 }, () => ({
+    //     id: Math.floor(Math.random() * 10000),
+    //     name: `Item ${Math.floor(Math.random() * 100)}`,
+    //     price: Math.random() * 100
+    // }));
+
+    var data = {{result|tojson}};
 
     var table = new Tabulator("#example-table", {
         data: data,
         columns: [
-            {title:"ID", field:"id", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по ID"},
-            {title:"Name", field:"name", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по названию"},
-            {title:"Price", field:"price", sorter:"number", formatter:"money", formatterParams:{symbol:"$"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по цене"}
+            {title:"Дата опроса", field:"survey_date", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"},headerFilter:"input", headerFilterPlaceholder:"Поиск по Дате опроса"},
+            {title:"ФИО", field:"fullname", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по ФИО"},
+            {title:"Дата рождения", field:"birthdate", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по Дате рождения"},
+            {title:"Пол", field:"gender", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по Полу"},
+            {title:"Рост", field:"height", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по Росту"},
+            {title:"Масса тела при рождении", field:"X6_birth_weight", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по массе тела при рождении"},
+            {title:"Масса тела на момент опроса", field:"weight", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по массе тела на момент опроса"},
+            {title:"Дата выявления СД2", field:"diagnosis_date", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по дате выявления СД2"},
+            {title:"Тип операции", field:"surgery_type", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Поиск по типу операции"},
+            {title:"Дата операции", field:"surgery_date", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по дате операции"},
+            {title:"Максимальная масса тела до операции", field:"max_weight_before_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по максимальной массе тела до операции"},
+            {title:"Масса тела перед операцией", field:"weight_before_surgery", sorter:"number",headerFilter:"input", headerFilterPlaceholder:"Поиск по массе тела до операции"},
+            {title:"Минимальная масса тела после операции", field:"min_weight_after_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по минимальной массе тела перед операцией"},
+            {title:"Сахароснижающая терапия до операции", field:"therapy_before_surgery", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по типу сахароснижающей терапии"},
+            {title:"Уровень гликированного гемоглобина в крови до операции", field:"X9_HbA1c_before_surgery", sorter:"number", formatter:"percent", formatterParams:{symbol:"%"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по уровню HbA1c до операции"},
+            {title:"Степень Артериальной гипертензии", field:"arterial_hypertension_degree", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по степени гипертензии"},
+            {title:"Дислипидемия", field:"dyslipidemia", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Поиск по наличию дислипидемии"},
+            {title:"Наследственность по ожирению и Сахарному Диабету 2 типа", field:"heredity", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по наличию наследственности"},
+            {title:"Осложнения Сахарного диабета 2 типа в анамнезе", field:"complications_history", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по наличию осложнений в анамнезе"},
+            {title:"Гестационный Сахарный Диабет в анамнезе", field:"gestational_diabetes", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по наличию гестационного СД2"},
+            {title:"Возраст на момент проведения операции", field:"X1_age_at_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по возрасту на момент операции"},
+            {title:"Длительность периода после операции", field:"X2_period_after_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по длительности периода после операции"},
+            {title:"Максимальный ИМТ до операции", field:"X3_max_BMI_before_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по максимальному ИМТ до операции"},
+            {title:"ИМТ перед операцией", field:"X4_BMI_before_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по ИМТ перед операцией"},
+            {title:"ИМТ на момент опроса", field:"X5_BMI_at_survey", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по ИМТ на момент опроса"},
+            {title:"Минимальный ИМТ после операции", field:"X7_min_BMI_after_surgery", sorter:"number",  headerFilter:"input", headerFilterPlaceholder:"Поиск по минимальному ИМТ после операции"},
+            {title:"Длительность СД2", field:"X8_illness_duration", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по длительности СД2"},
+            {title:"Уровень гликированного гемоглобина в крови на момент опроса", field:"Target_HbA1c_now", sorter:"number", formatter:"percent", formatterParams:{symbol:"%"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по уровню HbA1c на момент опроса"},
+            {title:"Спрогнозированный уровень гликированного гемоглобина в крови", field:"HbA1c_predicted", sorter:"number", formatter:"percent", formatterParams:{symbol:"%"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по уровню спрогнозированному уровню HbA1c"}
         ],
         layout:"fitColumns",
         pagination:"local",
@@ -74,12 +103,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Добавляем кнопку для скачивания
+    var buttonsContainer = document.createElement("div");
+    buttonsContainer.style.display = "flex";
+    buttonsContainer.style.justifyContent = "flex-start";
+    buttonsContainer.style.alignItems = "center";
+    buttonsContainer.style.gap = "10px";
+
     var downloadButton = document.createElement("button-csv");
     downloadButton.textContent = "Скачать CSV";
     downloadButton.addEventListener('click', function() {
         table.download("csv", "data.csv");
     });
+
+    var downloadButton2 = document.createElement("button-csv");
+    downloadButton2.textContent = "Скачать XLSX";
+    downloadButton2.addEventListener('click', function() {
+        table.download("xlsx", "patients.xlsx", {sheetName:"MyData"});
+    });
     document.body.appendChild(downloadButton);
+    document.body.appendChild(downloadButton2);
+
+    buttonsContainer.appendChild(downloadButton);
+    buttonsContainer.appendChild(downloadButton2);
+
+    document.body.appendChild(buttonsContainer);
+
 
 });
 

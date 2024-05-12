@@ -234,6 +234,8 @@ input[type="number"]:focus {
 #example-table .tabulator-cell {
     color: #333; /* Темно-серый текст */
     border-bottom: 2px solid #E8E8E8; /* Линия под каждой ячейкой */
+    min-width: 150px;
+    max-width: 150px;
 }
 
 /* Стили при наведении на ячейки */
@@ -241,6 +243,23 @@ input[type="number"]:focus {
     background-color: #f4f4f4; /* Светло-серый фон при наведении */
 }
 
+#example-table .tabulator-col {
+  min-width: 150px;
+  max-width: 150px;
+}
+
+
+#example-table .tabulator-col .tabulator-sortable .tabulator-col-sorter-element {
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.tabulator .tabulator-header .tabulator-col,
+    .tabulator .tabulator-tableholder .tabulator-table .tabulator-row .tabulator-cell {
+        min-width: 200px !important;
+        width: 200px !important;
+        max-width: 200px !important;
+    }
 /* Стилизация кнопки скачивания CSV */
 button-csv {
     background-color: #4CAF50; /* Зеленый цвет фона */

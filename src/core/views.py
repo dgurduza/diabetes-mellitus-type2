@@ -1,5 +1,5 @@
 from flask_login import login_required
-from flask import Blueprint, render_template, request, session, flash, send_file
+from flask import Blueprint, render_template, request, session, flash, send_file, jsonify
 from fileinput import filename
 from werkzeug.utils import secure_filename
 from src import app,db
@@ -11,6 +11,7 @@ import os
 import csv
 import pickle
 import uuid
+import json
 from src.calculator.views import calculate_age_at_operation,calculate_bmi,calculate_post_operation_duration,calculate_illness_duration
 
 core_bp = Blueprint("core", __name__)
@@ -31,18 +32,25 @@ groups_expected_val = Data.groups_expected_val
 def home():
     return render_template("core/index.html")
 
+@core_bp.route("/analitics")
+@login_required
+def get_analitics():
+    return render_template("core/analitics.html")
+
 
 @core_bp.route("/view_patients")
 @login_required
 def get_table():
-    return render_template("core/view_patients.html",data=db.session.query(Patient).all())
+    data=db.session.query(Patient).all()
+    print(json.dumps([record.serialize for record in data],ensure_ascii=False))
+    return render_template("core/view_patients.html",result=json.dumps([record.serialize for record in data],ensure_ascii=False))
 
 
 @core_bp.route('/home', methods=['GET', 'POST'])
 @login_required
 def uploadFile():
     if request.method == 'POST':
-        try:
+        #try:
             # upload file flask
             f = request.files.get('file')
  
@@ -70,10 +78,10 @@ def uploadFile():
                                             Patient.gender == data[3],
                                             Patient.X6_birth_weight == float(data[5]),
                                             Patient.diagnosis_date == datetime.strptime(data[7], "%d.%m.%Y"),
-                                            Patient.surgery_type == data[8]).count() != 0 and len(data) != len(check_arr):
+                                            Patient.surgery_type == data[8]).count() != 0 or len(data) != len(check_arr):
                         break
 
-
+                    #TODO: Подумать над UUID
                     if db.session.query(Patient).filter(Patient.fullname == data[1],
                                             Patient.birthdate == datetime.strptime(data[2], "%d.%m.%Y"),
                                             Patient.gender == data[3],
@@ -142,9 +150,9 @@ def uploadFile():
                     db.session.add(patient)
                     db.session.commit()
 
-        except Exception as e:
-                db.session.rollback()
-                flash(f"Непредвиденная ошибка при сохранении данных: {e}", "danger")
+        #except Exception as e:
+        #        db.session.rollback()
+        #        flash(f"Непредвиденная ошибка при сохранении данных: {e}", "danger")
 
     flash(f"Загружено: {count} пациентов", "success")
     return render_template("core/index.html")

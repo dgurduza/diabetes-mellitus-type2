@@ -35,7 +35,7 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
       <a href="#">Главная</a>
       <a href="{{ url_for('core.get_table') }}">Пациенты</a>
-      <a href="#">Аналитика</a>
+      <a href="{{ url_for('core.get_analitics') }}">Аналитика</a>
       <a href="#">Администрирование</a>
   </div>
   {% endif %}

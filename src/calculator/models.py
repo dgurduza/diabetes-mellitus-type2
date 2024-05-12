@@ -1,11 +1,12 @@
 from src import db
 from datetime import datetime
 from sqlalchemy.orm import relationship
- 
+
+
 class Patient(db.Model):
 
     __tablename__ = "patients"
-    
+
     pat_uuid = db.Column(db.String, nullable=False, primary_key=True)
     survey_date = db.Column(db.DateTime, nullable=False, primary_key=True)
     fullname = db.Column(db.String, nullable=False, primary_key=True)
@@ -99,6 +100,40 @@ class Patient(db.Model):
         self.X8_illness_duration = X8_illness_duration
         self.Target_HbA1c_now = Target_HbA1c_now
 
+    @property
+    def serialize(self):
+        return {
+            "survey_date": self.survey_date.strftime("%d.%m.%Y"),
+            "fullname": self.fullname,
+            "birthdate": self.birthdate.strftime("%d.%m.%Y"),
+            "gender": self.gender,
+            "height": self.height,
+            "X6_birth_weight": self.X6_birth_weight,
+            "weight": self.weight,
+            "diagnosis_date": self.diagnosis_date.strftime("%d.%m.%Y"),
+            "surgery_type": self.surgery_type,
+            "surgery_date": self.surgery_date.strftime("%d.%m.%Y"),
+            "max_weight_before_surgery": self.max_weight_before_surgery,
+            "weight_before_surgery": self.weight_before_surgery,
+            "min_weight_after_surgery": self.min_weight_after_surgery,
+            "therapy_before_surgery": self.therapy_before_surgery,
+            "X9_HbA1c_before_surgery": self.X9_HbA1c_before_surgery,
+            "arterial_hypertension_degree": self.arterial_hypertension_degree,
+            "dyslipidemia": self.dyslipidemia,
+            "heredity": self.heredity,
+            "complications_history": self.complications_history,
+            "gestational_diabetes": self.gestational_diabetes,
+            "X1_age_at_surgery": self.X1_age_at_surgery,
+            "X2_period_after_surgery": self.X2_period_after_surgery,
+            "X3_max_BMI_before_surgery": self.X3_max_BMI_before_surgery,
+            "X4_BMI_before_surgery": self.X4_BMI_before_surgery,
+            "X5_BMI_at_survey": self.X5_BMI_at_survey,
+            "X7_min_BMI_after_surgery": self.X7_min_BMI_after_surgery,
+            "X8_illness_duration": self.X8_illness_duration,
+            "Target_HbA1c_now": self.Target_HbA1c_now,
+            "HbA1c_predicted": self.HbA1c_predicted
+        }
+
     # TODO: Проанализировать что нужно возвращать
     def __repr__(self):
         return f"<user {self.username}>"
@@ -119,7 +154,7 @@ class Patient(db.Model):
 #     HbA1c_predicted = db.Column(db.Float, nullable=False)
 
 #     patient = relationship("Patient")
-    
+
 
 #     def __init__(
 #         self,
