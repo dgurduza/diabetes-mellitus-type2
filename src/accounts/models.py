@@ -34,6 +34,15 @@ class User(UserMixin, db.Model):
     def is_otp_valid(self, user_otp):
         totp = pyotp.parse_uri(self.get_authentication_setup_uri())
         return totp.verify(user_otp)
-
+    
+    @property
+    def serialize(self):
+        return {
+            "ID": self.id,
+            "username": self.username,
+            "created_date": self.created_at.strftime("%d.%m.%Y"),
+            "2FA_enabled": self.is_two_factor_authentication_enabled
+        }
+    
     def __repr__(self):
         return f"<user {self.username}>"

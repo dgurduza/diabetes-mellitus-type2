@@ -3,7 +3,7 @@
 <head>
     <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url_for('static', filename="styles.css")}}">
+    <link rel="stylesheet" href="{{url_for('static', filename="patients_table.css")}}">
 </head>
 <body>
 
@@ -11,11 +11,11 @@
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary p-3" data-bs-theme="dark">
     <div class="container-fluid">
         <!-- Поместите кнопку открытия меню в начало навбара -->
-        {% if current_user.is_two_factor_authentication_enabled %}
+        {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
         <button class="openbtn" onclick="openNav()">☰</button>
         {% endif %}
         <!-- Ссылка на главную или заголовок сайта -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             Прогнозирование риска рецидива сахарного диабета 2 типа после достижения ремиссии в ходе бариатрической хирургии
         </a>
 
@@ -28,12 +28,12 @@
         <!-- Содержимое навбара -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li><a href="{{ url_for('calculator.calculate') }}" class="btn btn-outline-info">Calculator</a></li>
+                <li><a href="{{ url_for('calculator.calculate') }}" class="btn btn-outline-info">Калькулятор</a></li>
             </ul>
-            {% if current_user.is_authenticated %}
-            <a href="{{ url_for('accounts.logout') }}"><button type="button" class="btn btn-danger me-2">Logout</button></a>
+            {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
+            <a href="{{ url_for('accounts.logout') }}"><button type="button" class="btn btn-danger me-2">Выйти</button></a>
             {% else %}
-            <a href="{{ url_for('accounts.login') }}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+            <a href="{{ url_for('accounts.login') }}"><button type="button" class="btn btn-outline-primary me-2">Войти</button></a>
             {% endif %}
         </div>
     </div>
@@ -41,40 +41,41 @@
     <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="#">Главная</a>
+        <a href="{{ url_for('core.home') }}">Главная</a>
+        <a href="{{ url_for('calculator.calculate') }}">Калькулятор</a>
         <a href="{{ url_for('core.get_table') }}">Пациенты</a>
         <a href="{{ url_for('core.get_analitics') }}">Аналитика</a>
-        <a href="#">Администрирование</a>
+        <a href="{{ url_for('core.admin_console') }}">Пользователи</a>
     </div>
 </nav>
 
     <div id="example-table"></div>
     <script src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
+    <link href="/dist/css/tabulator_bootstrap5.min.css" rel="table-striped">
     <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/luxon/3.3.0/luxon.min.js'></script>
     <script>
 
 document.addEventListener("DOMContentLoaded", function() {
-    // var data = Array.from({ length: 100 }, () => ({
-    //     id: Math.floor(Math.random() * 10000),
-    //     name: `Item ${Math.floor(Math.random() * 100)}`,
-    //     price: Math.random() * 100
-    // }));
+    var data = {{ result|tojson }};
 
-    var data = {{result|tojson}};
-
+    // sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"},
     var table = new Tabulator("#example-table", {
         data: data,
+        printAsHtml:true,
+        printStyled:true,
+        printRowRange : "all" ,
         columns: [
-            {title:"Дата опроса", field:"survey_date", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"},headerFilter:"input", headerFilterPlaceholder:"Поиск по Дате опроса"},
+            {title:"Дата опроса", field:"survey_date", formatter:"datetime", formatterParams:{ inputFormat:"dd.MM.yyyy", outputFormat:"dd-MM-yyyy"},sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"},headerFilter:"input", headerFilterPlaceholder:"Поиск по Дате опроса"},
             {title:"ФИО", field:"fullname", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по ФИО"},
-            {title:"Дата рождения", field:"birthdate", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по Дате рождения"},
+            {title:"Дата рождения", field:"birthdate",formatter:"datetime", formatterParams:{ inputFormat:"dd.MM.yyyy", outputFormat:"dd-MM-yyyy"},sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по Дате рождения"},
             {title:"Пол", field:"gender", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Поиск по Полу"},
             {title:"Рост", field:"height", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по Росту"},
             {title:"Масса тела при рождении", field:"X6_birth_weight", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по массе тела при рождении"},
             {title:"Масса тела на момент опроса", field:"weight", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по массе тела на момент опроса"},
-            {title:"Дата выявления СД2", field:"diagnosis_date", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по дате выявления СД2"},
+            {title:"Дата выявления СД2", field:"diagnosis_date", formatter:"datetime", formatterParams:{ inputFormat:"dd.MM.yyyy", outputFormat:"dd-MM-yyyy"},sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по дате выявления СД2"},
             {title:"Тип операции", field:"surgery_type", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Поиск по типу операции"},
-            {title:"Дата операции", field:"surgery_date", sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по дате операции"},
+            {title:"Дата операции", field:"surgery_date", formatter:"datetime", formatterParams:{ inputFormat:"dd.MM.yyyy", outputFormat:"dd-MM-yyyy"},sorter:"date", sorterParams:{format:"dd.MM.yyyy",alignEmptyValues:"top"}, headerFilter:"input", headerFilterPlaceholder:"Поиск по дате операции"},
             {title:"Максимальная масса тела до операции", field:"max_weight_before_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по максимальной массе тела до операции"},
             {title:"Масса тела перед операцией", field:"weight_before_surgery", sorter:"number",headerFilter:"input", headerFilterPlaceholder:"Поиск по массе тела до операции"},
             {title:"Минимальная масса тела после операции", field:"min_weight_after_surgery", sorter:"number", headerFilter:"input", headerFilterPlaceholder:"Поиск по минимальной массе тела перед операцией"},
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
         ],
         layout:"fitColumns",
         pagination:"local",
-        paginationSize:10,
+        paginationSize:15,
         movableColumns:true,
         resizableRows:true,
     });
@@ -105,9 +106,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Добавляем кнопку для скачивания
     var buttonsContainer = document.createElement("div");
     buttonsContainer.style.display = "flex";
-    buttonsContainer.style.justifyContent = "flex-start";
     buttonsContainer.style.alignItems = "center";
     buttonsContainer.style.gap = "10px";
+    buttonsContainer.style.justifyContent = "flex-end"
 
     var downloadButton = document.createElement("button-csv");
     downloadButton.textContent = "Скачать CSV";
@@ -120,11 +121,20 @@ document.addEventListener("DOMContentLoaded", function() {
     downloadButton2.addEventListener('click', function() {
         table.download("xlsx", "patients.xlsx", {sheetName:"MyData"});
     });
+
+    var downloadButton3 = document.createElement("button-csv");
+    downloadButton3.textContent = "Распечатать страницу";
+    downloadButton3.addEventListener('click', function() {
+        table.print();
+    });
+
     document.body.appendChild(downloadButton);
     document.body.appendChild(downloadButton2);
+    document.body.appendChild(downloadButton3);
 
     buttonsContainer.appendChild(downloadButton);
     buttonsContainer.appendChild(downloadButton2);
+    buttonsContainer.appendChild(downloadButton3);
 
     document.body.appendChild(buttonsContainer);
 

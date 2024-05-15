@@ -24,8 +24,47 @@ body {
   margin: 0px;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.analize-container {
+  display: flex;
+  height: 100%;
+  /* Обеспечивает 100% высоты */
+  width: 100%;
+  /* Обеспечивает 100% ширины */
+}
+
+.chart-container {
+  height: 100%;
+  /* Обеспечивает 100% высоты */
+  width: 75%;
+  /* Обеспечивает 100% ширины */
+  background-color: #dfdddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart {
+  /* График занимает 75% ширины родительского контейнера */
+  height: 100%;
+  /* График занимает 100% высоты родительского контейнера */
+  margin: auto;
+  /* Центрируем график по горизонтали */
+}
+
+.filter-container {
+  width: 25%;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: fit-content;
+}
+
 .container {
-  margin-left: auto;
+  margin-left: 0;
 }
 
 form {
@@ -111,7 +150,7 @@ select:focus {
 
 /* Стилизация кнопки */
 input[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #0d6efd;
   /* Зеленый цвет фона */
   color: white;
   /* Белый текст */
@@ -123,7 +162,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #0d6efd;
   /* Чуть темнее зеленого при наведении */
 }
 
@@ -202,25 +241,6 @@ input[type="number"] {
   outline: none;
   /* Убирает стандартный контур фокуса в некоторых браузерах */
 }
-
-.analize-container {
-  display: flex;
-  height: 100%;
-  /* Сделаем контейнер высотой 100% экрана */
-}
-
-.chart {
-  width: 75%;
-  height: calc(100vh - 60px);
-  /* 100% по высоте экрана минус высота навигационного меню */
-  margin: auto;
-  /* Центрируем график по горизонтали */
-}
-
-.filter-container {
-  width: 25%;
-}
-
 
 input[type="number"]:focus {
   border-color: #666;
@@ -313,7 +333,7 @@ input[type="number"]:focus {
 
 /* Стили заголовка таблицы */
 #example-table .tabulator-header {
-  background-color: #4CAF50;
+  background-color: #0d6efd;
   /* Зеленый цвет фона заголовка */
   font-size: 16px;
   font-weight: bold;

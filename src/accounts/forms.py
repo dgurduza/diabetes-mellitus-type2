@@ -16,7 +16,7 @@ class RegisterForm(FlaskForm):
         "Repeat password",
         validators=[
             DataRequired(),
-            EqualTo("password", message="Passwords must match."),
+            EqualTo("password", message="Пароли не совпадают."),
         ],
     )
 
@@ -26,10 +26,10 @@ class RegisterForm(FlaskForm):
             return False
         user = User.query.filter_by(username=self.username.data).first()
         if user:
-            self.username.errors.append("Username already registered")
+            self.username.errors.append("Пользователь уже зарегистрирован.")
             return False
         if self.password.data != self.confirm.data:
-            self.password.errors.append("Passwords must match")
+            self.password.errors.append("Пароли не совпадают.")
             return False
         return True
 

@@ -1,8 +1,56 @@
+.home-container {
+  display: flex;
+  height: 100%;
+  /* Обеспечивает 100% высоты */
+  width: 100%;
+  /* Обеспечивает 100% ширины */
+}
+
+.chart-container {
+  height: 100%;
+  /* Обеспечивает 100% высоты */
+  width: 75%;
+  /* Обеспечивает 100% ширины */
+  background-color: #dfdddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart {
+  /* График занимает 75% ширины родительского контейнера */
+  height: 100%;
+  /* График занимает 100% высоты родительского контейнера */
+  margin: auto;
+  /* Центрируем график по горизонтали */
+}
+
+.form-container-Data{
+  margin: auto;
+}
+
 .navbar-brand {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1.4rem;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form-container-csv {
+  text-align: center; /* Выравнивание по центру для дочерних элементов */
+}
+.form-container-csv input[type="submit"] {
+  margin-top: 10px; /* Дополнительный отступ для кнопки */
+}
+.form-container-pkl {
+  text-align: center; /* Выравнивание по центру для дочерних элементов */
+}
+.form-container-pkl input[type="submit"] {
+  margin-top: 10px; /* Дополнительный отступ для кнопки */
+}
 .error {
   color: red;
   margin-bottom: 5px;
@@ -24,8 +72,10 @@ body {
   margin: 0px;
 }
 
-.container {
-  margin-left: auto;
+html,
+body {
+  height: 100%;
+  margin: 0;
 }
 
 form {
@@ -35,10 +85,7 @@ form {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 20px;
+  align-items: center;
 }
 
 input[type="text"],
@@ -111,7 +158,7 @@ select:focus {
 
 /* Стилизация кнопки */
 input[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #0d6efd;
   /* Зеленый цвет фона */
   color: white;
   /* Белый текст */
@@ -119,11 +166,13 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  align-content: center;
+  margin-top: 10px;
   /* Курсор в виде руки при наведении */
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #0d6efd;
   /* Чуть темнее зеленого при наведении */
 }
 
@@ -141,11 +190,7 @@ input[type="submit"]:hover {
 
 /* Дополнительные стили для улучшения визуального вида формы */
 .form-container {
-  max-width: 600px;
-  float: left !important;
-  margin-left: 0 !important;
-  /* Максимальная ширина контейнера */
-  margin: 0 auto;
+  float: right !important;
   /* Центрирование контейнера по горизонтали */
   /* Центрирование по горизонтали */
   background-color: #f8f8f8;
@@ -158,9 +203,9 @@ input[type="submit"]:hover {
   overflow-y: auto;
 }
 
-form {
-  width: 100%;
-  /* Форма занимает всю ширину контейнера */
+h1 {
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 input[type="text"],
@@ -202,25 +247,6 @@ input[type="number"] {
   outline: none;
   /* Убирает стандартный контур фокуса в некоторых браузерах */
 }
-
-.analize-container {
-  display: flex;
-  height: 100%;
-  /* Сделаем контейнер высотой 100% экрана */
-}
-
-.chart {
-  width: 75%;
-  height: calc(100vh - 60px);
-  /* 100% по высоте экрана минус высота навигационного меню */
-  margin: auto;
-  /* Центрируем график по горизонтали */
-}
-
-.filter-container {
-  width: 25%;
-}
-
 
 input[type="number"]:focus {
   border-color: #666;
@@ -301,85 +327,17 @@ input[type="number"]:focus {
   width: 100%;
   color: #ff0000;
 }
-
-/* Основные стили для таблицы */
-#example-table .tabulator {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  /* Убираем видимость полосы прокрутки */
-}
-
-/* Стили заголовка таблицы */
-#example-table .tabulator-header {
-  background-color: #4CAF50;
-  /* Зеленый цвет фона заголовка */
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* Стили ячеек таблицы */
-#example-table .tabulator-cell {
-  color: #333;
-  /* Темно-серый текст */
-  border-bottom: 2px solid #E8E8E8;
-  /* Линия под каждой ячейкой */
-  min-width: 150px;
-  max-width: 150px;
-}
-
-/* Стили при наведении на ячейки */
-#example-table .tabulator-row:hover {
-  background-color: #f4f4f4;
-  /* Светло-серый фон при наведении */
-}
-
-#example-table .tabulator-col {
-  min-width: 150px;
-  max-width: 150px;
-}
-
-
-#example-table .tabulator-col .tabulator-sortable .tabulator-col-sorter-element {
-  min-width: 150px;
-  max-width: 150px;
-}
-
-.tabulator .tabulator-header .tabulator-col,
-.tabulator .tabulator-tableholder .tabulator-table .tabulator-row .tabulator-cell {
-  min-width: 200px !important;
-  width: 200px !important;
-  max-width: 200px !important;
-}
-
-
-/* Стилизация кнопки скачивания CSV */
-button-csv {
-  background-color: #4CAF50;
-  /* Зеленый цвет фона */
-  display: block;
-  /* Делаем кнопку блочным элементом */
-  width: fit-content;
-  /* Автоматически подгоняем ширину под содержимое */
-  margin-left: auto;
-  /* Выравниваем по центру */
-  margin-right: auto;
-  color: white;
+.btn-close {
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #000;
+  opacity: 0.5;
+  background: none;
   border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  margin: 10px;
-  margin-top: 20px;
+  padding: 0;
   cursor: pointer;
-  /* Изменение курсора при наведении */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  /* Тень для кнопки */
-  transition: background-color 0.3s;
-  /* Плавное изменение цвета */
 }
 
-button-csv:hover {
-  background-color: #45a049;
-  /* Темно-зеленый цвет при наведении */
+.btn-close:hover {
+  opacity: 0.75;
 }

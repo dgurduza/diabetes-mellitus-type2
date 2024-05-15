@@ -16,16 +16,8 @@ a {
 body {
   align-content: center;
   align-items: center;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  margin: 0px;
-}
-
-.container {
-  margin-left: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8f8;
 }
 
 form {
@@ -107,11 +99,12 @@ select:focus {
   /* Центрирование содержимого */
   margin-top: 20px;
   /* Отступ сверху */
+  float: right;
 }
 
 /* Стилизация кнопки */
 input[type="submit"] {
-  background-color: #4CAF50;
+  background-color: #0d6efd;
   /* Зеленый цвет фона */
   color: white;
   /* Белый текст */
@@ -123,7 +116,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #0d6efd;
   /* Чуть темнее зеленого при наведении */
 }
 
@@ -142,11 +135,8 @@ input[type="submit"]:hover {
 /* Дополнительные стили для улучшения визуального вида формы */
 .form-container {
   max-width: 600px;
-  float: left !important;
-  margin-left: 0 !important;
   /* Максимальная ширина контейнера */
-  margin: 0 auto;
-  /* Центрирование контейнера по горизонтали */
+  margin: 0;
   /* Центрирование по горизонтали */
   background-color: #f8f8f8;
   /* Цвет фона */
@@ -155,7 +145,7 @@ input[type="submit"]:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   /* Тень */
   max-height: 85vh;
-  overflow-y: auto;
+  overflow-y: auto
 }
 
 form {
@@ -184,7 +174,9 @@ select {
   /* Отступ сверху для списка ошибок */
 }
 
-
+.container {
+  margin: 0;
+}
 
 input[type="number"] {
   width: 100%;
@@ -313,7 +305,7 @@ input[type="number"]:focus {
 
 /* Стили заголовка таблицы */
 #example-table .tabulator-header {
-  background-color: #4CAF50;
+  background-color: #0d6efd;
   /* Зеленый цвет фона заголовка */
   font-size: 16px;
   font-weight: bold;
@@ -356,7 +348,7 @@ input[type="number"]:focus {
 
 /* Стилизация кнопки скачивания CSV */
 button-csv {
-  background-color: #4CAF50;
+  background-color: #0d6efd;
   /* Зеленый цвет фона */
   display: block;
   /* Делаем кнопку блочным элементом */
@@ -370,7 +362,7 @@ button-csv {
   border-radius: 4px;
   padding: 10px 20px;
   margin: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   cursor: pointer;
   /* Изменение курсора при наведении */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -380,6 +372,6 @@ button-csv {
 }
 
 button-csv:hover {
-  background-color: #45a049;
+  background-color: #0d6efd;
   /* Темно-зеленый цвет при наведении */
 }

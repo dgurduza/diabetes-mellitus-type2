@@ -9,6 +9,7 @@ from src import login_manager
 accounts_bp = Blueprint("accounts", __name__)
 
 HOME_URL = "core.home"
+LOGIN_URL = "accounts.login"
 SETUP_2FA_URL = "accounts.setup_two_factor_auth"
 VERIFY_2FA_URL = "accounts.verify_two_factor_auth"
 
@@ -22,11 +23,11 @@ def load_user(user_id):
 def register():
     if current_user.is_authenticated:
         if current_user.is_two_factor_authentication_enabled:
-            flash("You are already registered.", "info")
+            flash("Аккаунт уже зарегистрирован.", "info")
             return redirect(url_for(HOME_URL))
         else:
             flash(
-                "You have not enabled 2-Factor Authentication. Please enable first to login.", "info")
+                "Вы не включили двухфакторную аутентификацию. Пожалуйста, сначала включите ее для входа в систему.", "info")
             return redirect(url_for(SETUP_2FA_URL))
     form = RegisterForm(request.form)
     if form.validate_on_submit():
@@ -36,12 +37,12 @@ def register():
             db.session.commit()
 
             login_user(user)
-            flash("You are registered. You have to enable 2-Factor Authentication first to login.", "success")
+            flash("Вы зарегистрированы. Для входа в систему вам необходимо сначала включить двухфакторную аутентификацию.", "success")
 
             return redirect(url_for(SETUP_2FA_URL))
         except Exception:
             db.session.rollback()
-            flash("Registration failed. Please try again.", "danger")
+            flash("Не удалось зарегистрироваться. Пожалуйста, попробуйте снова.", "danger")
 
     return render_template("accounts/register.html", form=form)
 
@@ -50,14 +51,14 @@ def register():
 def login():
     if current_user.is_authenticated:
         if current_user.is_two_factor_authentication_enabled and current_user.is_two_factor_authenticated:
-            flash("You are already logged in.", "info")
+            flash("Вы уже вошли в аккаунт.", "info")
             return redirect(url_for(HOME_URL))
         elif not current_user.is_two_factor_authentication_enabled:
             flash(
-                "You have not enabled 2-Factor Authentication. Please enable first to login.", "info")
+                "Вы не включили двухфакторную аутентификацию. Пожалуйста, сначала включите ее для входа в систему.", "info")
             return redirect(url_for(SETUP_2FA_URL))
         else: 
-            flash("You have not entered 2FA code. Please enter code.", "info")
+            flash("Вы не ввели OTP код. Пожалуйста, введите код.", "info")
             return redirect(url_for(VERIFY_2FA_URL))
         
     form = LoginForm(request.form)
@@ -67,13 +68,13 @@ def login():
             login_user(user)
             if not current_user.is_two_factor_authentication_enabled:
                 flash(
-                    "You have not enabled 2-Factor Authentication. Please enable first to login.", "info")
+                    "Вы не включили двухфакторную аутентификацию. Пожалуйста, сначала включите ее для входа в систему.", "info")
                 return redirect(url_for(SETUP_2FA_URL))
             return redirect(url_for(VERIFY_2FA_URL))
         elif not user:
-            flash("You are not registered. Please register.", "danger")
+            flash("Вы не зарегистрированы. Пожалуйста, обратитесь к администратору", "danger")
         else:
-            flash("Invalid username and/or password.", "danger")
+            flash("Неверное имя пользователя или пароль.", "danger")
     return render_template("accounts/login.html", form=form)
 
 
@@ -84,12 +85,12 @@ def logout():
         current_user.is_two_factor_authenticated = False
         db.session.commit()
         logout_user()
-        flash("You were logged out.", "success")
+        flash("Вы вышли из аккаунта.", "success")
     except Exception:
             db.session.rollback()
-            flash("Logout is failed. Please try again.", "danger")
+            flash("Не удалось выйти из аккаунта. Пожалуйста, попробуйте снова.", "danger")
     
-    return redirect(url_for("calculator.calculate"))
+    return redirect(url_for(LOGIN_URL))
 
 
 
@@ -112,23 +113,23 @@ def verify_two_factor_auth():
                 if current_user.is_two_factor_authentication_enabled:
                     current_user.is_two_factor_authenticated = True
                     db.session.commit()
-                    flash("2FA verification successful. You are logged in!", "success")
+                    flash("Двухфакторная аутентификация прошла успешно. Вы вошли в аккаунт!", "success")
                     return redirect(url_for(HOME_URL))
                 else:
                     current_user.is_two_factor_authenticated = True
                     current_user.is_two_factor_authentication_enabled = True
                     db.session.commit()
-                    flash("2FA setup successful. You are logged in!", "success")
+                    flash("Двухфакторная аутентификация прошла успешно. Вы вошли в систему!", "success")
                     return redirect(url_for(HOME_URL))
             except Exception:
                     db.session.rollback()
-                    flash("2FA setup failed. Please try again.", "danger")
+                    flash("Не удалось настроить двухфакторную аутентификацию. Пожалуйста, попробуйте снова.", "danger")
                     return redirect(url_for(VERIFY_2FA_URL))
         else:
-            flash("Invalid OTP. Please try again.", "danger")
+            flash("Недействительный OTP. Пожалуйста, попробуйте снова.", "danger")
             return redirect(url_for(VERIFY_2FA_URL))
     else:
         if not current_user.is_two_factor_authentication_enabled:
             flash(
-                "You have not enabled 2-Factor Authentication. Please enable it first.", "info")
+                "Вы не включили двухфакторную аутентификацию. Пожалуйста, сначала включите ее.", "info")
         return render_template("accounts/verify-2fa.html", form=form)

@@ -1,0 +1,441 @@
+.result-container{
+    padding-bottom: 20px;
+}
+
+.h3, h3 {
+    font-size: 1.4rem;
+    text-align: center;
+    padding-top: 10px;
+}
+
+hr {
+    margin: 1rem;
+}
+
+.h2, h2 {
+    font-size: 1.75rem;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.predict-container{
+    float:left;
+    background-color: #efeeee;
+    border-radius: 5px;
+    /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 49%;
+    height: 90%;
+}
+
+.prop-container {
+    float:right;
+    background-color: #efeeee;
+    border-radius: 5px;
+    /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 49%;
+    height: 90%;
+    text-align: center;
+}
+
+.form-container {
+    max-width: 600px;
+    float: left !important;
+    margin-left: 0 !important;
+    /* Максимальная ширина контейнера */
+    margin: 0 auto;
+    /* Центрирование контейнера по горизонтали */
+    /* Центрирование по горизонтали */
+    background-color: #f8f8f8;
+    /* Цвет фона */
+    border-radius: 5px;
+    /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Тень */
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.col-md-4 {
+    background-color: #e2e1e1;
+    /* Цвет фона для контейнера результатов */
+    padding: 20px;
+    /* Отступ внутри контейнера */
+    height: 100%;
+    /* Занимает всю доступную высоту */
+    float: right;
+    /* Цвет фона */
+    border-radius: 5px;
+    /* Скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Тень */
+    height: 85vh;
+    width: 1080px;
+    margin-left: 10px;
+}
+
+.navbar-brand {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.4rem;
+}
+
+.error {
+    color: red;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.container {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+}
+
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #f8f8f8;
+}
+
+/* Стили для выпадающего списка */
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #f8f8f8;
+}
+
+/* Стили для опций выпадающего списка */
+option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Стили для наведения на опцию выпадающего списка */
+option:hover {
+    background-color: #f0f0f0;
+}
+
+option {
+    background-color: #fff;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    outline: none;
+    border-color: #666;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Стилизация контейнера кнопки */
+.submit-button-container {
+    text-align: center;
+    /* Центрирование содержимого */
+    margin-top: 20px;
+    /* Отступ сверху */
+}
+
+/* Стилизация кнопки */
+input[type="submit"] {
+    background-color: #4CAF50;
+    /* Зеленый цвет фона */
+    color: white;
+    /* Белый текст */
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* Курсор в виде руки при наведении */
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+    /* Чуть темнее зеленого при наведении */
+}
+
+.center-content {
+    text-align: center;
+    /* Выравнивание содержимого по центру */
+}
+
+.submit-button-container {
+    text-align: center;
+    /* Центрирование кнопки */
+    margin-top: 20px;
+    /* Отступ сверху для отделения от остальной части формы */
+}
+
+/* Дополнительные стили для улучшения визуального вида формы */
+
+form {
+    width: 100%;
+    /* Форма занимает всю ширину контейнера */
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    /* Полная ширина для текстовых полей и выпадающих списков */
+    padding: 12px;
+    /* Отступы для текстовых полей */
+    margin-top: 8px;
+    /* Отступ сверху для всех полей */
+    border: 1px solid #ccc;
+    /* Граница для полей */
+    border-radius: 4px;
+    /* Скругленные углы для полей */
+}
+
+.errors {
+    color: red;
+    /* Цвет текста ошибок */
+    margin-top: 5px;
+    /* Отступ сверху для списка ошибок */
+}
+
+
+
+input[type="number"] {
+    width: 100%;
+    /* Задает ширину поля ввода, здесь она на 100% контейнера */
+    padding: 8px;
+    /* Внутренний отступ вокруг текста в поле ввода */
+    border: 1px solid #ccc;
+    /* Граница поля ввода серого цвета */
+    border-radius: 4px;
+    /* Скругление углов поля ввода */
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    /* Тень, создающая эффект небольшого "поднятия" элемента */
+    font-size: 16px;
+    /* Размер шрифта внутри поля ввода */
+    outline: none;
+    /* Убирает стандартный контур фокуса в некоторых браузерах */
+}
+
+.analize-container {
+    display: flex;
+    height: 100%;
+    /* Сделаем контейнер высотой 100% экрана */
+}
+
+.chart {
+    width: 75%;
+    height: calc(100vh - 60px);
+    /* 100% по высоте экрана минус высота навигационного меню */
+    margin: auto;
+    /* Центрируем график по горизонтали */
+}
+
+.filter-container {
+    width: 25%;
+}
+
+
+input[type="number"]:focus {
+    border-color: #666;
+    /* Меняет цвет границы при фокусе на более темный */
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+    /* Увеличивает тень при фокусе */
+}
+
+/* Стиль для sidebar */
+.sidebar {
+    height: 100%;
+    /* 100% высоты */
+    width: 0;
+    /* 0 ширина - sidebar изначально скрыт */
+    position: fixed;
+    /* Фиксированное положение */
+    z-index: 1;
+    /* Отображается поверх других элементов */
+    top: 0;
+    /* Расположение вверху страницы */
+    left: 0;
+    /* Расположение слева страницы */
+    background-color: rgba(43, 48, 53, 1);
+    /* Цвет фона */
+    overflow-x: hidden;
+    /* Скрывает горизонтальную прокрутку */
+    transition: 0.5s;
+    /* Плавное открытие и закрытие */
+    padding-top: 60px;
+    /* Отступ сверху */
+}
+
+/* Стиль для элементов в sidebar */
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    /* Отступы вокруг текста */
+    text-decoration: none;
+    /* Без подчеркивания текста */
+    font-size: 25px;
+    /* Размер шрифта */
+    color: #fff;
+    /* Цвет текста */
+    display: block;
+    /* Элементы отображаются как блоки */
+    transition: 0.3s;
+    /* Плавность перехода */
+}
+
+/* Изменение стиля элементов при наведении */
+.sidebar a:hover {
+    color: #f1f1f1;
+    /* Светлый цвет текста */
+}
+
+/* Кнопка для закрытия sidebar */
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Кнопка для открытия sidebar */
+.openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    top: 20px;
+    left: 10px;
+    margin-right: 15px;
+    background-color: rgba(28, 28, 28, 0)
+}
+
+.navbar {
+    padding-top: 20px;
+    width: 100%;
+    color: #ff0000;
+}
+
+/* Основные стили для таблицы */
+#example-table .tabulator {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Убираем видимость полосы прокрутки */
+}
+
+/* Стили заголовка таблицы */
+#example-table .tabulator-header {
+    background-color: #4CAF50;
+    /* Зеленый цвет фона заголовка */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Стили ячеек таблицы */
+#example-table .tabulator-cell {
+    color: #333;
+    /* Темно-серый текст */
+    border-bottom: 2px solid #E8E8E8;
+    /* Линия под каждой ячейкой */
+    min-width: 150px;
+    max-width: 150px;
+}
+
+/* Стили при наведении на ячейки */
+#example-table .tabulator-row:hover {
+    background-color: #f4f4f4;
+    /* Светло-серый фон при наведении */
+}
+
+#example-table .tabulator-col {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+
+#example-table .tabulator-col .tabulator-sortable .tabulator-col-sorter-element {
+    min-width: 150px;
+    max-width: 150px;
+}
+
+.tabulator .tabulator-header .tabulator-col,
+.tabulator .tabulator-tableholder .tabulator-table .tabulator-row .tabulator-cell {
+    min-width: 200px !important;
+    width: 200px !important;
+    max-width: 200px !important;
+}
+
+
+/* Стилизация кнопки скачивания CSV */
+button-csv {
+    background-color: #4CAF50;
+    /* Зеленый цвет фона */
+    display: block;
+    /* Делаем кнопку блочным элементом */
+    width: fit-content;
+    /* Автоматически подгоняем ширину под содержимое */
+    margin-left: auto;
+    /* Выравниваем по центру */
+    margin-right: auto;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    /* Изменение курсора при наведении */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Тень для кнопки */
+    transition: background-color 0.3s;
+    /* Плавное изменение цвета */
+}
+
+button-csv:hover {
+    background-color: #45a049;
+    /* Темно-зеленый цвет при наведении */
+}

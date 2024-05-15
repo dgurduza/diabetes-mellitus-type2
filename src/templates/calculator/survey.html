@@ -1,142 +1,279 @@
-{% extends "_base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-{% if result.message %}
-<div>{{ result.message }}</div>
-{% endif %}
-<div class="form-container">
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <p>{{ form.survey_date.label }} {{ form.survey_date }}</p>
-        {% if form.survey_date.errors %}
-            {% for error in form.survey_date.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            <li>{{ form.survey_date.data }}</li>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.fullname.label }} {{ form.fullname }}</p>
-        {% if form.fullname.errors %}
-            {% for error in form.fullname.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.birthdate.label }} {{ form.birthdate }}</p>
-        {% if form.birthdate.errors %}
-            {% for error in form.birthdate.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.gender.label }} {{ form.gender }}</p>
-        {% if form.gender.errors %}
-            {% for error in form.gender.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.height.label }} {{ form.height }}</p>
-        {% if form.height.errors %}
-            {% for error in form.height.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.X6_birth_weight.label }} {{ form.X6_birth_weight }}</p>
-        {% if form.X6_birth_weight.errors %}
-            {% for error in form.X6_birth_weight.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.weight.label }} {{ form.weight }}</p>
-        {% if form.weight.errors %}
-            {% for error in form.weight.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.diagnosis_date.label }} {{ form.diagnosis_date }}</p>
-        {% if form.diagnosis_date.errors %}
-            {% for error in form.diagnosis_date.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.surgery_type.label }} {{ form.surgery_type }}</p>
-        {% if form.surgery_type.errors %}
-            {% for error in form.surgery_type.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.surgery_date.label }} {{ form.surgery_date }}</p>
-        {% if form.surgery_date.errors %}
-            {% for error in form.surgery_date.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.max_weight_before_surgery.label }} {{ form.max_weight_before_surgery }}</p>
-        {% if form.max_weight_before_surgery.errors %}
-            {% for error in form.max_weight_before_surgery.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.weight_before_surgery.label }} {{ form.weight_before_surgery }}</p>
-        {% if form.weight_before_surgery.errors %}
-            {% for error in form.weight_before_surgery.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.min_weight_after_surgery.label }} {{ form.min_weight_after_surgery }}</p>
-        {% if form.min_weight_after_surgery.errors %}
-            {% for error in form.min_weight_after_surgery.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.therapy_before_surgery.label }} {{ form.therapy_before_surgery }}</p>
-        {% if form.therapy_before_surgery.errors %}
-            {% for error in form.therapy_before_surgery.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
+<head>
+    <meta charset="utf-8">
+    <title>Diabetes</title>
+    <!-- meta -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- styles -->
+    <!-- CSS only -->
+    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename="survey.css")}}">
+    <style>
+        .messages-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+    </style>
+</head>
 
-        <p>{{ form.X9_HbA1c_before_surgery.label }} {{ form.X9_HbA1c_before_surgery }}</p>
-        {% if form.X9_HbA1c_before_surgery.errors %}
-            {% for error in form.X9_HbA1c_before_surgery.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
+<body>
+    <!-- messages -->
+    <div class="messages-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="row">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+        </div>
         {% endif %}
-        <p>{{ form.arterial_hypertension_degree.label }} {{ form.arterial_hypertension_degree }}</p>
-        {% if form.arterial_hypertension_degree.errors %}
-            {% for error in form.arterial_hypertension_degree.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.dyslipidemia.label }} {{ form.dyslipidemia }}</p>
-        {% if form.dyslipidemia.errors %}
-            {% for error in form.dyslipidemia.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.heredity.label }} {{ form.heredity }}</p>
-        {% if form.heredity.errors %}
-            {% for error in form.heredity.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.complications_history.label }} {{ form.complications_history }}</p>
-        {% if form.complications_history.errors %}
-            {% for error in form.complications_history.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.gestational_diabetes.label }} {{ form.gestational_diabetes }}</p>
-        {% if form.gestational_diabetes.errors %}
-            {% for error in form.gestational_diabetes.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p>{{ form.Target_HbA1c_now.label }} {{ form.Target_HbA1c_now }}</p>
-        {% if form.Target_HbA1c_now.errors %}
-            {% for error in form.Target_HbA1c_now.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-        <p><input type="submit" value="Отправить"></p>
-    </form>
-</div>
+        {% endwith %}
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary p-3" data-bs-theme="dark">
+        <div class="container-fluid">
+            <!-- Поместите кнопку открытия меню в начало навбара -->
+            {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
+            <button class="openbtn" onclick="openNav()">☰</button>
+            {% endif %}
+            <!-- Ссылка на главную или заголовок сайта -->
+            <a class="navbar-brand" href="/">
+                Прогнозирование риска рецидива сахарного диабета 2 типа после достижения ремиссии в ходе бариатрической
+                хирургии
+            </a>
 
-{% endblock %}
+            <!-- Кнопка для мобильных устройств -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Содержимое навбара -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li><a href="{{ url_for('calculator.calculate') }}" class="btn btn-outline-info">Калькулятор</a>
+                    </li>
+                </ul>
+                {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
+                <a href="{{ url_for('accounts.logout') }}"><button type="button"
+                        class="btn btn-danger me-2">Выйти</button></a>
+                {% else %}
+                <a href="{{ url_for('accounts.login') }}"><button type="button"
+                        class="btn btn-outline-primary me-2">Войти</button></a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="{{ url_for('core.home') }}">Главная</a>
+            <a href="{{ url_for('calculator.calculate') }}">Калькулятор</a>
+            <a href="{{ url_for('core.get_table') }}">Пациенты</a>
+            <a href="{{ url_for('core.get_analitics') }}">Аналитика</a>
+            <a href="{{ url_for('core.admin_console') }}">Пользователи</a>
+        </div>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+
+        <br>
+
+        <div class="form-container">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <p>{{ form.survey_date.label }} {{ form.survey_date }}</p>
+                {% if form.survey_date.errors %}
+                {% for error in form.survey_date.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                <li>{{ form.survey_date.data }}</li>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.fullname.label }} {{ form.fullname }}</p>
+                {% if form.fullname.errors %}
+                {% for error in form.fullname.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.birthdate.label }} {{ form.birthdate }}</p>
+                {% if form.birthdate.errors %}
+                {% for error in form.birthdate.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.gender.label }} {{ form.gender }}</p>
+                {% if form.gender.errors %}
+                {% for error in form.gender.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.height.label }} {{ form.height }}</p>
+                {% if form.height.errors %}
+                {% for error in form.height.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.X6_birth_weight.label }} {{ form.X6_birth_weight }}</p>
+                {% if form.X6_birth_weight.errors %}
+                {% for error in form.X6_birth_weight.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.weight.label }} {{ form.weight }}</p>
+                {% if form.weight.errors %}
+                {% for error in form.weight.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.diagnosis_date.label }} {{ form.diagnosis_date }}</p>
+                {% if form.diagnosis_date.errors %}
+                {% for error in form.diagnosis_date.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.surgery_type.label }} {{ form.surgery_type }}</p>
+                {% if form.surgery_type.errors %}
+                {% for error in form.surgery_type.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.surgery_date.label }} {{ form.surgery_date }}</p>
+                {% if form.surgery_date.errors %}
+                {% for error in form.surgery_date.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.max_weight_before_surgery.label }} {{ form.max_weight_before_surgery }}</p>
+                {% if form.max_weight_before_surgery.errors %}
+                {% for error in form.max_weight_before_surgery.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.weight_before_surgery.label }} {{ form.weight_before_surgery }}</p>
+                {% if form.weight_before_surgery.errors %}
+                {% for error in form.weight_before_surgery.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.min_weight_after_surgery.label }} {{ form.min_weight_after_surgery }}</p>
+                {% if form.min_weight_after_surgery.errors %}
+                {% for error in form.min_weight_after_surgery.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.therapy_before_surgery.label }} {{ form.therapy_before_surgery }}</p>
+                {% if form.therapy_before_surgery.errors %}
+                {% for error in form.therapy_before_surgery.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+
+                <p>{{ form.X9_HbA1c_before_surgery.label }} {{ form.X9_HbA1c_before_surgery }}</p>
+                {% if form.X9_HbA1c_before_surgery.errors %}
+                {% for error in form.X9_HbA1c_before_surgery.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.arterial_hypertension_degree.label }} {{ form.arterial_hypertension_degree }}</p>
+                {% if form.arterial_hypertension_degree.errors %}
+                {% for error in form.arterial_hypertension_degree.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.dyslipidemia.label }} {{ form.dyslipidemia }}</p>
+                {% if form.dyslipidemia.errors %}
+                {% for error in form.dyslipidemia.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.heredity.label }} {{ form.heredity }}</p>
+                {% if form.heredity.errors %}
+                {% for error in form.heredity.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.complications_history.label }} {{ form.complications_history }}</p>
+                {% if form.complications_history.errors %}
+                {% for error in form.complications_history.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.gestational_diabetes.label }} {{ form.gestational_diabetes }}</p>
+                {% if form.gestational_diabetes.errors %}
+                {% for error in form.gestational_diabetes.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p>{{ form.Target_HbA1c_now.label }} {{ form.Target_HbA1c_now }}</p>
+                {% if form.Target_HbA1c_now.errors %}
+                {% for error in form.Target_HbA1c_now.errors %}
+                <div class="alert alert-danger" role="alert">{{ error }}</div>
+                {% endfor %}
+                {% endif %}
+                <p><input type="submit" value="Отправить"></p>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="result-container">
+                <h1>Результаты</h1>
+            </div>
+            <div class="predict-container">
+                <h2>Прогнозное значение гликированного гемоглобина:</h2>
+                <br/>
+                <h3>{{ result }}%</h3>
+                <br/>
+                <hr>
+                <br/>
+                <h2>Рекомендация:</h2>
+                <br/>
+                <h3>{{ message }}</h3>
+            </div>
+            <div class="prop-container">
+                <h2>Рассчитанные показатели:</h2>
+                <br/>
+                {% for key,value in properties.items() %}
+                <p>{{ key }}: {{ value }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px"; // Задаем ширину sidebar
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0"; // Скрываем sidebar
+        }
+
+    </script>
+    {% block js %}{% endblock %}
+</body>
+
+</html>

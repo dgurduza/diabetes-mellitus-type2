@@ -19,12 +19,12 @@
       <!-- Содержимое навбара -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li><a href="{{ url_for('calculator.calculate') }}" class="btn btn-outline-info">Calculator</a></li>
+              <li><a href="{{ url_for('calculator.calculate') }}" class="btn btn-outline-info">Калькулятор</a></li>
           </ul>
           {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
-          <a href="{{ url_for('accounts.logout') }}"><button type="button" class="btn btn-danger me-2">Logout</button></a>
+          <a href="{{ url_for('accounts.logout') }}"><button type="button" class="btn btn-danger me-2">Выйти</button></a>
           {% else %}
-          <a href="{{ url_for('accounts.login') }}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+          <a href="{{ url_for('accounts.login') }}"><button type="button" class="btn btn-outline-primary me-2">Войти</button></a>
           {% endif %}
       </div>
   </div>
@@ -33,10 +33,10 @@
   {% if current_user.is_authenticated and current_user.is_two_factor_authenticated %}
   <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-      <a href="#">Главная</a>
+      <a href="{{ url_for('core.home') }}">Главная</a>
       <a href="{{ url_for('core.get_table') }}">Пациенты</a>
       <a href="{{ url_for('core.get_analitics') }}">Аналитика</a>
-      <a href="#">Администрирование</a>
+      <a href="{{ url_for('core.admin_console') }}">Пользователи</a>
   </div>
   {% endif %}
 </nav>
