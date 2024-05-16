@@ -120,6 +120,7 @@ def admin_console():
                 user = User(username=form.username.data, password=form.password.data)
                 db.session.add(user)
                 db.session.commit()
+                data = db.session.query(User).all()
             except Exception:
                 db.session.rollback()
                 flash("Регистрация не удалась. Пожалуйста, попробуйте снова.", "danger")
@@ -206,8 +207,13 @@ def uploadFile():
             try:
                 f = request.files.get("file")
                 data_filename = secure_filename(f.filename)
-                f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
 
+                if len(data_filename) == 0:
+                    flash(f"Выберите файл загрузки!", "danger")
+                    plot = get_Y_plot()
+                    return render_template("core/index.html", graphJSON=plot)
+                
+                f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
                 session["uploaded_data_file_path"] = os.path.join(
                     app.config["UPLOAD_FOLDER"], data_filename
                 )
@@ -325,10 +331,12 @@ def uploadFile():
             except Exception as e:
                 db.session.rollback()
                 flash(f"Непредвиденная ошибка: {e}", "danger")
-                return render_template("core/index.html")
+                plot = get_Y_plot()
+                return render_template("core/index.html", graphJSON=plot)
 
         flash(f"Загружено: {count} пациентов", "success")
-        return render_template("core/index.html")
+        plot = get_Y_plot()
+        return render_template("core/index.html", graphJSON=plot)
 
     flash("Вы не ввели OTP код. Пожалуйста, введите код.", "info")
     return redirect(url_for(VERIFY_2FA_URL))
@@ -383,8 +391,13 @@ def set_model():
         try:
             f = request.files.get("file")
             data_filename = secure_filename(f.filename)
-            f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
 
+            if len(data_filename) == 0:
+                    flash(f"Выберите файл загрузки!", "danger")
+                    plot = get_Y_plot()
+                    return render_template("core/index.html", graphJSON=plot)
+            
+            f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
             session["uploaded_data_file_path"] = os.path.join(
                 app.config["UPLOAD_FOLDER"], data_filename
             )
@@ -397,12 +410,14 @@ def set_model():
             regression = Data.model
             groups_expected_val = Data.model
             flash(f"Модель обновлена", "info")
-            return render_template("core/index.html")
+            plot = get_Y_plot()
+            return render_template("core/index.html", graphJSON=plot)
 
         except Exception as e:
             db.session.rollback()
             flash(f"Непредвиденная ошибка: {e}", "danger")
-            return render_template("core/index.html")
+            plot = get_Y_plot()
+            return render_template("core/index.html", graphJSON=plot)
 
     flash("Вы не ввели OTP код. Пожалуйста, введите код.", "info")
     return redirect(url_for(VERIFY_2FA_URL))

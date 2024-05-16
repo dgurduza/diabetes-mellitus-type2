@@ -134,48 +134,8 @@ class Patient(db.Model):
             "HbA1c_predicted": self.HbA1c_predicted
         }
 
-    # TODO: Проанализировать что нужно возвращать
+    
     def __repr__(self):
         return f"<user {self.username}>"
 
 
-# class Survey(db.Model):
-
-#     __tablename__ = "surveys"
-
-#     UUID = db.Column(db.String, ForeignKey(Patient.pat_uuid), nullable=False, primary_key=True)
-#     survey_date = db.Column(db.DateTime, nullable=False, primary_key=True)
-#     weight = db.Column(db.Float, nullable=False)
-#     min_weight_after_surgery = db.Column(db.Float, nullable=False)
-#     X2_period_after_surgery = db.Column(db.Float, nullable=False)
-#     X5_BMI_at_survey = db.Column(db.Float, nullable=False)
-#     X7_min_BMI_after_surgery = db.Column(db.Float, nullable=False)
-#     Target_HbA1c_now = db.Column(db.Float, default=0, nullable=False)
-#     HbA1c_predicted = db.Column(db.Float, nullable=False)
-
-#     patient = relationship("Patient")
-
-
-#     def __init__(
-#         self,
-#         UUID,
-#         survey_date,
-#         weight,
-#         min_weight_after_surgery,
-#         X2_period_after_surgery,
-#         X5_BMI_at_survey,
-#         X7_min_BMI_after_surgery,
-#         Target_HbA1c_now
-#     ):
-#         self.UUID = UUID
-#         self.survey_date = survey_date
-#         self.weight = weight
-#         self.min_weight_after_surgery = min_weight_after_surgery
-#         self.X2_period_after_surgery = X2_period_after_surgery
-#         self.X5_BMI_at_survey = X5_BMI_at_survey
-#         self.X7_min_BMI_after_surgery = X7_min_BMI_after_surgery
-#         self.Target_HbA1c_now = Target_HbA1c_now
-
-#     # TODO: Проанализировать что нужно возвращать
-#     def __repr__(self):
-#         return f"<user {self.username}>"

@@ -3,6 +3,12 @@
   font-size: 1.4rem;
 }
 
+.navbar-expand-lg .navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+  justify-content: flex-end;
+}
+
 .error {
   color: red;
   margin-bottom: 5px;

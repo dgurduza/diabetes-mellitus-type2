@@ -66,7 +66,7 @@ def calculate():
                 != 0
             ):
                 flash(f"Пациент с введенной датой опроса существует!", "danger")
-                return render_template("calculator/survey.html")
+                return render_template("calculator/survey.html", form=form, properties={})
 
             get_pat_uuid = str(uuid.uuid4())
             patient = Patient(
@@ -154,7 +154,6 @@ def calculate():
             result = float(result_reg * 100)
             message = get_result_message(result)
             result = format(result, ".2f")
-            print(properties)
             return render_template(
                 "calculator/survey.html",
                 form=form,

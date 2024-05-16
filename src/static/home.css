@@ -33,6 +33,12 @@
   font-size: 1.4rem;
 }
 
+.navbar-expand-lg .navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+  justify-content: flex-end;
+}
+
 .container {
   display: flex;
   justify-content: center;

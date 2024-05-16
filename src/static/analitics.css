@@ -37,6 +37,11 @@ body {
   width: 100%;
   /* Обеспечивает 100% ширины */
 }
+.navbar-expand-lg .navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+  justify-content: flex-end;
+}
 
 .chart-container {
   height: 100%;
