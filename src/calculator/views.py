@@ -10,7 +10,6 @@ import uuid
 
 calculator_bp = Blueprint("calculator", __name__)
 
-
 def get_model():
     deserialize_array = None
     with open("src/statistics/model.pkl", "rb") as f:
@@ -18,6 +17,15 @@ def get_model():
         data = Regression(deserialize_array)
     return data
 
+def set_model(path):
+    deserialize_array = None
+    with open(path, "rb") as f:
+        deserialize_array = pickle.load(f)
+        data = Regression(deserialize_array)
+
+global Data
+global regression
+global groups_expected_val
 
 Data = get_model()
 regression = Data.model

@@ -14,6 +14,7 @@ from werkzeug.utils import secure_filename
 from src import app, db
 from src.calculator.models import Patient
 from src.calculator.regression import Regression
+from src.calculator.views import Data,groups_expected_val,regression
 from datetime import datetime
 from .forms import RegisterForm, AnaliticsForm
 from src.accounts.models import User
@@ -212,6 +213,10 @@ def uploadFile():
                     flash(f"Выберите файл загрузки!", "danger")
                     plot = get_Y_plot()
                     return render_template("core/index.html", graphJSON=plot)
+                elif data_filename.find(".pkl"):
+                    set_model(f,data_filename)
+                    plot = get_Y_plot()
+                    return render_template("core/index.html", graphJSON=plot)
                 
                 f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
                 session["uploaded_data_file_path"] = os.path.join(
@@ -342,7 +347,7 @@ def uploadFile():
     return redirect(url_for(VERIFY_2FA_URL))
 
 
-@core_bp.route("/model", methods=["GET", "POST"])
+@core_bp.route("/template", methods=["GET", "POST"])
 @login_required
 def get_template():
     if current_user.is_two_factor_authenticated:
@@ -384,40 +389,25 @@ def get_template():
     return redirect(url_for(VERIFY_2FA_URL))
 
 
-@core_bp.route("/template", methods=["GET", "POST"])
-@login_required
-def set_model():
-    if current_user.is_two_factor_authenticated:
-        try:
-            f = request.files.get("file")
-            data_filename = secure_filename(f.filename)
+def set_model(f, data_filename):
+            try:
+                print(data_filename)
+                
+                f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
+                session["uploaded_data_file_path"] = os.path.join(
+                    app.config["UPLOAD_FOLDER"], data_filename
+                )
 
-            if len(data_filename) == 0:
-                    flash(f"Выберите файл загрузки!", "danger")
-                    plot = get_Y_plot()
-                    return render_template("core/index.html", graphJSON=plot)
-            
-            f.save(os.path.join(app.config["UPLOAD_FOLDER"], data_filename))
-            session["uploaded_data_file_path"] = os.path.join(
-                app.config["UPLOAD_FOLDER"], data_filename
-            )
-            nums = None
-            path = session.get("uploaded_data_file_path", None)
-            global Data
-            global regression
-            global groups_expected_val
-            Data = get_model(path)
-            regression = Data.model
-            groups_expected_val = Data.model
-            flash(f"Модель обновлена", "info")
-            plot = get_Y_plot()
-            return render_template("core/index.html", graphJSON=plot)
+                path = os.path.join(
+                    app.config["UPLOAD_FOLDER"], data_filename
+                )
+                print(path)
+                
+                Data = get_model(path)
+                regression = Data.model
+                groups_expected_val = Data.model
+                flash(f"Модель обновлена", "info")
 
-        except Exception as e:
-            db.session.rollback()
-            flash(f"Непредвиденная ошибка: {e}", "danger")
-            plot = get_Y_plot()
-            return render_template("core/index.html", graphJSON=plot)
-
-    flash("Вы не ввели OTP код. Пожалуйста, введите код.", "info")
-    return redirect(url_for(VERIFY_2FA_URL))
+            except Exception as e:
+                db.session.rollback()
+                flash(f"Непредвиденная ошибка: 1{e}", "danger")
