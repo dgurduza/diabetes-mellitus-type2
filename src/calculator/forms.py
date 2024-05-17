@@ -124,7 +124,7 @@ class CalculateForm(FlaskForm):
     )
     Target_HbA1c_now = DecimalField(
         "Уровень гликированного гемоглобина на данный момент",
-        validators=[Optional(), NumberRange(min=4, max=60, message="Введите корректное значение")],
+        validators=[DataRequired(), NumberRange(min=4, max=60, message="Введите корректное значение")],
         places=4
     )
 
