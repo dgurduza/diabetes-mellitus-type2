@@ -11,6 +11,3 @@ class Regression:
             self.M_error = array[3]
         elif len(array) > 4:
             self.D_error = array[4]
-
-    # TODO: Get Arguments
-    #def set_model(file):

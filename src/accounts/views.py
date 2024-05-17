@@ -19,7 +19,7 @@ def load_user(user_id):
     return User.query.filter(User.id == int(user_id)).first()
 
 
-@accounts_bp.route("/register", methods=["GET", "POST"])
+#@accounts_bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
         if current_user.is_two_factor_authentication_enabled:
